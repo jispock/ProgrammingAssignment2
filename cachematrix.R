@@ -3,29 +3,29 @@
 
 
 makeCacheMatrix <- function(x = matrix()) {
-  #Set the cached inverse varible "inv" to NULL
-  inv <- NULL 
+  #Set the cached inverse varible "inv_matrix" to NULL
+  inv_matrix <- NULL 
         
   # This function initilizes the "Special" Matrix
   set <- function(y){
     x <<- y
-    inv <<- NULL 
+    inv_matrix <<- NULL 
   }
         
   # This function return the matrix itself
   get <- function() x
         
   # This function store the calculated inverse
-  setinv <- function(inverse) inv <<- inverse
+  setinverse <- function(inverse) inv <<- inverse
         
   # This function retriev the cached inverse
-  getinv <- function() inv
+  getinverse <- function() inv
         
   # Return this "special" matrix
   list(set = set, 
        get = get, 
-       setinv = setinv, 
-       getinv = getinv)
+       setinverse = setinverse,
+       getinverse = getinverse)
   
 
 }
@@ -37,7 +37,7 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
   
   # Get the stored value from the special matrix.
-  inv <- x$getinv()
+  inv <- x$getinverse()
         
   # The value is not NULL indicating that the value have already calculated. 
   if (!is.null(inv)){
@@ -47,9 +47,9 @@ cacheSolve <- function(x, ...) {
         
   # The value is NULL, calculate it and store it in the special matrix
   data <- x$get()
-  inv <- solve(data)
-  x$setinv(inv)
-  inv
+  inv_matrix <- solve(data)
+  x$setinverse(inv)
+  inv_matrix
         
         ## Return a matrix that is the inverse of 'x'
 }
